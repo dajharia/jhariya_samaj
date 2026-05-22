@@ -1,4 +1,5 @@
 import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata = {
   title: "Jhariya Samaj",
@@ -11,15 +12,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
 
-      <body className="bg-black text-white">
+      <body>
 
-        <div className="flex min-h-screen">
+        <ThemeProvider attribute="class" defaultTheme="light" themes={['light', 'dark', 'indigo', 'ocean-blue', 'crimson-red', 'emerald-green', 'amber-gold', 'midnight-purple', 'system']}>
 
-          {children}
+          <div className="flex min-h-screen">
 
-        </div>
+            {children}
+
+          </div>
+
+        </ThemeProvider>
 
       </body>
 

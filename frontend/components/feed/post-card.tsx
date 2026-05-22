@@ -1,76 +1,64 @@
-import {
-  Heart,
-  MessageCircle,
-  Share2,
-} from "lucide-react"
+import { Heart, MessageCircle, Send, MoreHorizontal, User } from "lucide-react"
 
-export default function PostCard() {
+interface PostCardProps {
+  authorName: string;
+  timeAgo: string;
+  content: string;
+  likes: number;
+  comments: number;
+  hasImage?: boolean;
+}
 
+export default function PostCard({ authorName, timeAgo, content, likes, comments, hasImage = true }: PostCardProps) {
   return (
-    <div className="bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800">
-
-      {/* Header */}
-
-      <div className="flex items-center gap-3 p-4">
-
-        <div className="w-12 h-12 rounded-full bg-zinc-700" />
-
-        <div>
-
-          <h3 className="font-semibold">
-            Dashrath Jharia
-          </h3>
-
-          <p className="text-sm text-zinc-400">
-            2 hours ago
-          </p>
-
+    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 text-zinc-900 dark:text-white shadow-sm transition-colors duration-300">
+      
+      {/* Header (User Info) */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center overflow-hidden shrink-0">
+            {/* जब आपके पास असली इमेजेज हों, तो यहाँ next/image का इस्तेमाल करें */}
+            <User className="w-6 h-6 text-zinc-500 dark:text-zinc-400" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-sm">{authorName}</h3>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">{timeAgo}</p>
+          </div>
         </div>
-
+        <button className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+          <MoreHorizontal className="w-5 h-5" />
+        </button>
       </div>
 
-      {/* Image */}
-
-      <div className="aspect-square bg-zinc-800" />
-
-      {/* Content */}
-
-      <div className="p-4">
-
-        <p className="text-zinc-200">
-          Welcome to our community platform 🚀
+      {/* Content (Text) */}
+      <div className="mb-4">
+        <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
+          {content}
         </p>
-
-        {/* Actions */}
-
-        <div className="flex items-center gap-6 mt-5 text-zinc-300">
-
-          <button className="flex items-center gap-2">
-
-            <Heart size={20} />
-
-            <span>24</span>
-
-          </button>
-
-          <button className="flex items-center gap-2">
-
-            <MessageCircle size={20} />
-
-            <span>8</span>
-
-          </button>
-
-          <button>
-
-            <Share2 size={20} />
-
-          </button>
-
-        </div>
-
       </div>
 
+      {/* Media (Image Placeholder) */}
+      {hasImage && (
+        <div className="w-full h-48 sm:h-64 bg-zinc-100 dark:bg-zinc-800 rounded-xl mb-4 flex items-center justify-center border border-zinc-200 dark:border-zinc-700/50 transition-colors duration-300">
+          <span className="text-zinc-500 dark:text-zinc-400 text-sm">Post Image / Video</span>
+        </div>
+      )}
+
+      {/* Actions (Like, Comment, Share) */}
+      <div className="flex items-center justify-between pt-3 border-t border-zinc-100 dark:border-zinc-800 transition-colors duration-300">
+        <button className="flex items-center space-x-2 text-zinc-500 dark:text-zinc-400 hover:text-pink-500 dark:hover:text-pink-500 transition-colors">
+          <Heart className="w-5 h-5" />
+          <span className="text-xs font-medium">{likes}</span>
+        </button>
+        <button className="flex items-center space-x-2 text-zinc-500 dark:text-zinc-400 hover:text-blue-500 dark:hover:text-blue-500 transition-colors">
+          <MessageCircle className="w-5 h-5" />
+          <span className="text-xs font-medium">{comments}</span>
+        </button>
+        <button className="flex items-center space-x-2 text-zinc-500 dark:text-zinc-400 hover:text-green-500 dark:hover:text-green-500 transition-colors">
+          <Send className="w-5 h-5" />
+          <span className="text-xs font-medium">Share</span>
+        </button>
+      </div>
     </div>
   )
 }

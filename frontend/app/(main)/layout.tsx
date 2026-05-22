@@ -8,7 +8,7 @@ export default function MainLayout({
 }) {
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div className="min-h-screen flex flex-col transition-colors duration-300" style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}>
 
       <Topbar />
 
