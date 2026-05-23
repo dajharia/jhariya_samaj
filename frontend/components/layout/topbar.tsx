@@ -29,7 +29,7 @@ export default function Topbar() {
             height={36} 
             className="rounded-full object-cover border border-border bg-secondary"
           />
-          <h1 className="text-xl font-bold text-foreground tracking-wide">
+          <h1 className="text-xl font-bold text-foreground tracking-wide hidden sm:block">
             Jhariya Samaj
           </h1>
         </Link>
@@ -44,13 +44,17 @@ export default function Topbar() {
             {/* Unread notification dot */}
             <span className="absolute top-2 right-2 w-2 h-2 bg-pink-500 rounded-full border border-background transition-colors duration-300"></span>
           </Link>
+          
+          {/* Theme Toggle - Hidden on Mobile */}
           <button 
             onClick={() => setTheme(isDarkMode ? "light" : "dark")}
-            className="cursor-pointer w-9 h-9 rounded-full bg-secondary flex items-center justify-center hover:text-foreground hover:bg-accent transition-colors"
+            className="hidden md:flex cursor-pointer w-9 h-9 rounded-full bg-secondary items-center justify-center hover:text-foreground hover:bg-accent transition-colors"
           >
             {mounted ? (isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />) : <span className="w-5 h-5" />}
           </button>
-          <Link href="/settings" className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center hover:text-foreground hover:bg-accent transition-colors">
+          
+          {/* Settings - Hidden on Mobile */}
+          <Link href="/settings" className="hidden md:flex w-9 h-9 rounded-full bg-secondary items-center justify-center hover:text-foreground hover:bg-accent transition-colors">
             <Settings className="w-5 h-5" />
           </Link>
         </div>
