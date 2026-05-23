@@ -10,8 +10,8 @@ interface NavLink {
   href: string
   label: string
   icon?: React.ReactNode
-  color: string
-  colorClass: string
+  hoverBg: string
+  hoverText: string
 }
 
 export default function Topbar() {
@@ -47,18 +47,18 @@ export default function Topbar() {
 
   const isDarkMode = theme === "dark"
 
-  // Navigation links को constant में रखा
+  // Navigation links को constant में रखा - Static Tailwind classes के साथ
   const categoryLinks: NavLink[] = [
-    { href: "/history", label: "History & Culture", icon: <BookOpen size={14} />, color: "indigo", colorClass: "indigo-500" },
-    { href: "/matrimony", label: "Matrimony", icon: <Heart size={14} />, color: "pink", colorClass: "pink-500" },
-    { href: "/events", label: "Events", color: "orange", colorClass: "orange-500" },
-    { href: "/community", label: "Community", color: "green", colorClass: "green-500" },
-    { href: "/blog", label: "News", color: "blue", colorClass: "blue-500" },
+    { href: "/history", label: "History & Culture", icon: <BookOpen size={14} />, hoverBg: "hover:bg-indigo-500/10", hoverText: "hover:text-indigo-500" },
+    { href: "/matrimony", label: "Matrimony", icon: <Heart size={14} />, hoverBg: "hover:bg-pink-500/10", hoverText: "hover:text-pink-500" },
+    { href: "/events", label: "Events", hoverBg: "hover:bg-orange-500/10", hoverText: "hover:text-orange-500" },
+    { href: "/community", label: "Community", hoverBg: "hover:bg-green-500/10", hoverText: "hover:text-green-500" },
+    { href: "/blog", label: "News", hoverBg: "hover:bg-blue-500/10", hoverText: "hover:text-blue-500" },
   ]
 
   const settingsLinks: NavLink[] = [
-    { href: "/settings", label: "Theme Settings", icon: <Palette size={16} />, color: "primary", colorClass: "primary" },
-    { href: "/community", label: "Community", icon: <Users size={16} />, color: "green", colorClass: "green-500" },
+    { href: "/settings", label: "Theme Settings", icon: <Palette size={16} />, hoverBg: "hover:bg-primary/10", hoverText: "hover:text-primary" },
+    { href: "/community", label: "Community", icon: <Users size={16} />, hoverBg: "hover:bg-green-500/10", hoverText: "hover:text-green-500" },
   ]
 
   const handleSettingsClose = useCallback(() => {
@@ -73,7 +73,7 @@ export default function Topbar() {
     <Link
       key={link.href}
       href={link.href}
-      className={`group flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-secondary hover:bg-${link.colorClass}/10 hover:text-${link.colorClass} border border-transparent transition-all duration-300 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm font-medium`}
+      className={`group flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-secondary border border-transparent transition-all duration-300 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm font-medium ${link.hoverBg} ${link.hoverText}`}
     >
       {link.icon && <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0">{link.icon}</span>}
       <span>{link.label}</span>
