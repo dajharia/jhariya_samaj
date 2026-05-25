@@ -28,7 +28,7 @@ export default function Topbar() {
     setMounted(true)
   }, [])
 
-  // Click outside handler को optimize किया
+  // Click outside handler को optimize किया - touch और mouse events को properly handle करने के लिए
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (settingsRef.current && !settingsRef.current.contains(event.target as Node)) {
@@ -39,11 +39,11 @@ export default function Topbar() {
     if (!isSettingsOpen) return
 
     document.addEventListener("mousedown", handleClickOutside)
-    document.addEventListener("touchstart", handleClickOutside, { passive: true })
+    document.addEventListener("touchend", handleClickOutside, { passive: false })
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
-      document.removeEventListener("touchstart", handleClickOutside)
+      document.removeEventListener("touchend", handleClickOutside)
     }
   }, [isSettingsOpen])
 
@@ -92,7 +92,7 @@ export default function Topbar() {
     <Link
       key={link.href}
       href={link.href}
-      className={`group flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-secondary border border-transparent transition-all duration-300 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm text-foreground/80 hover:text-foreground ${link.hoverBg} ${link.hoverText}`}
+      className={`group flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-secondary border border-transparent transition-all duration-300 whitespace-nowrap flex-shrink-0 text-xs sm:text-sm font-medium ${link.hoverBg} ${link.hoverText}`}
     >
       {link.icon && <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0">{link.icon}</span>}
       <span>{link.label}</span>
@@ -130,7 +130,7 @@ export default function Topbar() {
           {/* Search */}
           <Link 
             href="/search" 
-            className="group w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-secondary flex items-center justify-center hover:bg-blue-500/10 hover:text-blue-500 transition-all duration-300 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]"
+            className="group w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-secondary flex items-center justify-center hover:bg-blue-500/10 hover:text-blue-500 transition-all duration-300 hover:shadow-[0_0_10px_rgba(59,130,246,0.2)]"
             aria-label="Search"
           >
             <Search className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -139,7 +139,7 @@ export default function Topbar() {
           {/* Notifications */}
           <Link 
             href="/notifications" 
-            className="group relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-secondary flex items-center justify-center hover:bg-amber-500/10 hover:text-amber-500 transition-all duration-300 hover:shadow-[0_0_15px_rgba(217,119,6,0.2)]"
+            className="group relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-secondary flex items-center justify-center hover:bg-amber-500/10 hover:text-amber-500 transition-all duration-300 hover:shadow-[0_0_10px_rgba(245,158,11,0.2)]"
             aria-label="Notifications"
           >
             <Bell className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -156,7 +156,7 @@ export default function Topbar() {
           <button 
             onClick={handleThemeToggle}
             onTouchEnd={handleThemeToggle}
-            className="group w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-secondary flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-all duration-300 hover:shadow-[0_0_15px_rgba(129,140,248,0.2)]"
+            className="group w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-secondary flex items-center justify-center hover:bg-primary/10 hover:text-primary transition-all duration-300 hover:shadow-[0_0_10px_rgba(var(--primary),0.2)]"
             aria-label={`Switch to ${isDarkMode ? "light" : "dark"} mode`}
           >
             {mounted && isDarkMode ? (
@@ -173,7 +173,7 @@ export default function Topbar() {
             <button 
               onClick={handleSettingsClick}
               onTouchEnd={handleSettingsClick}
-              className="group w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-secondary flex items-center justify-center hover:bg-gray-500/10 hover:text-foreground transition-all duration-300 hover:shadow-[0_0_15px_rgba(100,116,139,0.2)]"
+              className="group w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-secondary flex items-center justify-center hover:bg-gray-500/10 hover:text-foreground transition-all duration-300 hover:shadow-[0_0_10px_rgba(107,114,128,0.2)]"
               aria-label="Settings"
               aria-expanded={isSettingsOpen}
               aria-haspopup="true"
@@ -185,6 +185,7 @@ export default function Topbar() {
               <div 
                 className="absolute right-0 top-full mt-2 w-48 sm:w-56 bg-card border border-border/50 rounded-xl shadow-lg z-[100] overflow-hidden animate-in fade-in zoom-in-95 duration-200 divide-y divide-border/30"
                 role="menu"
+                onClick={(e) => e.stopPropagation()}
                 onTouchEnd={(e) => e.stopPropagation()}
               >
                 {/* Language Settings */}
@@ -263,7 +264,7 @@ export default function Topbar() {
       </div>
 
       {/* Bottom section: Scrollable Categories */}
-      <nav className="flex gap-1.5 sm:gap-2 overflow-x-auto px-3 sm:px-4 pb-2.5 sm:pb-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] text-muted-foreground" aria-label="Category Navigation">
+      <nav className="flex gap-1.5 sm:gap-2 overflow-x-auto px-3 sm:px-4 pb-2.5 sm:pb-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] text-muted-foreground" aria-label="Category navigation">
         {categoryLinks.map(renderCategoryLink)}
       </nav>
 
