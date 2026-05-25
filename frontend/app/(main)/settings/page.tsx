@@ -42,7 +42,7 @@ export default function SettingsPage() {
     showToast(`${name} Theme Applied!`)
   }
 
-  const handleLanguageChange = (lang: string) => {
+  const handleLanguageChange = (lang: "en" | "hi") => {
     setLanguage(lang)
     showToast(lang === "hi" ? "भाषा बदलकर हिंदी कर दी गई है!" : "Language changed to English!")
   }
