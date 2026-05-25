@@ -4,7 +4,7 @@ import { BookOpen, Landmark, Users, ScrollText, ArrowRight } from "lucide-react"
 
 export default function HistoryPage() {
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-4xl mx-auto pb-10">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 w-full overflow-x-hidden px-4 sm:px-6 pb-24">
       
       {/* Page Header */}
       <div className="flex flex-col gap-3 text-center mb-10 pt-4">

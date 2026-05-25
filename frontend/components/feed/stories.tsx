@@ -12,7 +12,7 @@ export default function Stories() {
   ]
 
   return (
-    <div className="flex gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+    <div className="flex gap-4 overflow-x-auto w-full pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
       {/* Add Story Button (Current User) */}
       <div className="flex flex-col items-center min-w-[72px] cursor-pointer shrink-0">

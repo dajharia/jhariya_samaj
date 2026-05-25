@@ -14,11 +14,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
 
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+      </head>
+
       <body>
 
         <ThemeProvider attribute="class" defaultTheme="light" themes={['light', 'dark', 'indigo', 'ocean-blue', 'crimson-red', 'emerald-green', 'amber-gold', 'midnight-purple', 'system']}>
 
-          <div className="flex min-h-screen">
+          <div className="flex min-h-screen w-full overflow-x-hidden">
 
             {children}
 

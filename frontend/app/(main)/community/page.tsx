@@ -96,7 +96,7 @@ export default function CommunityPage() {
   const [searchQuery, setSearchQuery] = useState("")
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-5xl mx-auto pb-10">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 w-full overflow-x-hidden px-4 sm:px-6 pb-24">
       
       {/* Page Header */}
       <div className="flex flex-col gap-3 text-center mb-6 pt-4">
@@ -112,9 +112,9 @@ export default function CommunityPage() {
       </div>
 
       {/* Search Bar */}
-      <div className="relative max-w-xl mx-auto px-4 sm:px-0 mb-10">
+      <div className="relative w-full max-w-full px-0 mb-10">
         <div className="relative flex items-center w-full h-12 rounded-full shadow-sm bg-card border border-border/50 overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:border-primary transition-all">
-          <div className="grid place-items-center h-full w-12 text-muted-foreground">
+          <div className="grid place-items-center h-full w-12 text-muted-foreground shrink-0">
             <Search size={20} />
           </div>
           <input
@@ -153,12 +153,12 @@ export default function CommunityPage() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
                 {filteredMembers.map((member, mIdx) => (
-                  <div key={mIdx} className="bg-card border border-border/50 rounded-[1.5rem] p-4 flex flex-col items-center text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden">
+                  <div key={mIdx} className="bg-card border border-border/50 rounded-[1.5rem] p-3 sm:p-4 flex flex-col items-center text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden min-w-0">
                     
                     {/* Auto-generated Initial Avatar */}
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden mb-3 shadow-sm group-hover:scale-110 transition-transform duration-300 bg-secondary">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full overflow-hidden mb-2 sm:mb-3 shadow-sm group-hover:scale-110 transition-transform duration-300 bg-secondary shrink-0">
                       <img 
                         src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(member.name)}&backgroundColor=0ea5e9,6366f1,8b5cf6,ec4899,f59e0b&textColor=ffffff`} 
                         alt={member.name} 
@@ -166,10 +166,10 @@ export default function CommunityPage() {
                       />
                     </div>
                     
-                    <h3 className="font-bold text-foreground text-[13px] sm:text-sm leading-tight mb-1">{member.name}</h3>
-                    <span className="text-[10px] sm:text-xs font-semibold text-primary px-2 py-0.5 bg-primary/10 rounded-full mb-2 line-clamp-1 w-full">{member.role}</span>
-                    <div className="flex items-center text-[11px] sm:text-xs text-muted-foreground gap-1 mt-auto">
-                      <MapPin size={12} className="shrink-0" />
+                    <h3 className="font-bold text-foreground text-[11px] sm:text-[13px] leading-tight mb-1 truncate w-full">{member.name}</h3>
+                    <span className="text-[9px] sm:text-[10px] md:text-xs font-semibold text-primary px-1.5 sm:px-2 py-0.5 bg-primary/10 rounded-full mb-1.5 sm:mb-2 line-clamp-1 w-full">{member.role}</span>
+                    <div className="flex items-center text-[10px] sm:text-[11px] md:text-xs text-muted-foreground gap-1 mt-auto w-full justify-center">
+                      <MapPin size={12} className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                       <span className="truncate">{member.location}</span>
                     </div>
                   </div>
